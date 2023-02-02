@@ -9,13 +9,13 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe());
   //Swagger Setup
   const config = new DocumentBuilder()
-    .setTitle('Prajasram')
-    .setDescription('The Prajasram REST API description')
+    .setTitle('Amused Maids')
+    .setDescription('The Amused Maids REST-API')
     .setVersion('1.0')
-    .addTag('Prajasram')
+    .addTag('Maids for Every Reason and Occation')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('restapi', app, document);
   //Swagger End
 
   await app.listen(3000);
