@@ -18,15 +18,15 @@ export class PresentAddress {
   @IsString()
   @ApiProperty()
   city: string;
-  
+
   @IsString()
   @ApiProperty()
   state: string;
-  
+
   @IsString()
   @ApiProperty()
   zipcode: string;
-  
+
   @IsObject()
   @ApiProperty({ type: [Latlogn], required: false })
   @Type(() => Latlogn)
@@ -67,7 +67,7 @@ export class CreateUserDto {
   @IsNotEmpty()
   @ApiProperty()
   role: string;
-  
+
   @IsObject()
   @Type(() => ParmanentAddress)
   @ApiProperty({ type: [ParmanentAddress], required: false })
