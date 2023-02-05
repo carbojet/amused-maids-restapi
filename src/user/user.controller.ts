@@ -29,12 +29,13 @@ import {
   Response_Obj_200,
   Response_Obj_201,
 } from 'src/response';
-import { UsersService } from './users.service';
-@Controller('users')
-@ApiTags('users')
+import { UsersService } from './user.service';
+@Controller('user')
+@ApiTags('user')
 export class UsersController {
   constructor(private UsersService: UsersService) {}
 
+  //creating end point for add new user restapi/user/create
   @Post('/create')
   @ApiOperation({ summary: 'Create New Product' })
   @ApiConsumes('multipart/form-data', 'application/json')
@@ -66,4 +67,6 @@ export class UsersController {
     //console.log(body)
     return await this.UsersService.insertUser(body, res);
   }
+
+  //creating end point for get user details by providing ID restapi/user:ID
 }
