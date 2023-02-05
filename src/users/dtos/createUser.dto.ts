@@ -3,28 +3,28 @@ import { Type } from 'class-transformer';
 import { IsBoolean, IsNotEmpty, IsObject, IsString } from 'class-validator';
 export class Latlogn {
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   lat: string;
 
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   long: string;
 }
 export class PresentAddress {
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   address: string;
 
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   city: string;
 
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   state: string;
 
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   zipcode: string;
 
   @IsObject()
@@ -34,26 +34,26 @@ export class PresentAddress {
 }
 export class ParmanentAddress {
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   address: string;
 
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   city: string;
 
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   state: string;
 
   @IsString()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   zipcode: string;
 }
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  phone: string;
+  phone: number;
 
   @IsString()
   @ApiProperty({ required: false })
@@ -65,7 +65,7 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({ required: false })
   role: string;
 
   @IsObject()
@@ -75,7 +75,7 @@ export class CreateUserDto {
 
   @IsObject()
   @Type(() => PresentAddress)
-  @ApiProperty({ type: [PresentAddress], required: true })
+  @ApiProperty({ type: [PresentAddress], required: false })
   presentAddress: PresentAddress[];
 
   @IsBoolean()
