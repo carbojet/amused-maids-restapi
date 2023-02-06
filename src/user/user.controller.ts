@@ -40,7 +40,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Create New Product' })
   @ApiConsumes('multipart/form-data', 'application/json')
   @ApiCreatedResponse({
-    description: 'Product created successfully',
+    description: 'User created successfully',
     type: Response_Obj_201,
   })
   @ApiBadRequestResponse({
@@ -48,7 +48,7 @@ export class UsersController {
     type: Response_400,
   })
   @ApiConflictResponse({
-    description: 'Something want wrong while creating product',
+    description: 'Something want wrong while creating User',
     type: Response_409,
   })
   @ApiUnauthorizedResponse({
@@ -64,9 +64,7 @@ export class UsersController {
     @Request() req,
     @Response() res,
   ) {
-    //console.log(body)
     return await this.UsersService.insertUser(body, res);
   }
-
   //creating end point for get user details by providing ID restapi/user:ID
 }

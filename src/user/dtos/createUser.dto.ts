@@ -1,96 +1,133 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsBoolean, IsNotEmpty, IsObject, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmpty,
+  IsNotEmpty,
+  IsNumber,
+  IsObject,
+  IsString,
+} from 'class-validator';
+
 export class Latlogn {
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
   lat: string;
 
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
   long: string;
 }
 export class PresentAddress {
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
   address: string;
 
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
   city: string;
 
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
   state: string;
 
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
   zipcode: string;
 
   @IsObject()
-  @ApiProperty({ type: [Latlogn], required: false })
+  @ApiProperty({ type: Latlogn, required: false, default: Latlogn })
   @Type(() => Latlogn)
-  latlong: Latlogn[];
+  latlong: Latlogn;
 }
 export class ParmanentAddress {
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
   address: string;
 
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
   city: string;
 
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
   state: string;
 
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
   zipcode: string;
 }
+
 export class CreateUserDto {
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
+  @IsNumber()
+  @ApiProperty({ required: true })
   phone: number;
 
-  @IsString()
-  @ApiProperty({ required: false })
-  email: string;
+  @IsBoolean()
+  @ApiProperty({ required: false, default: false })
+  phoneverified: boolean;
 
   @IsString()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: '' })
+  email: string;
+
+  @IsBoolean()
+  @ApiProperty({ required: false, default: false })
+  emailverified: boolean;
+
+  @IsString()
+  @ApiProperty({ required: false, default: '' })
   password: string;
 
   @IsString()
-  @IsNotEmpty()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: true, default: '' })
   role: string;
 
   @IsObject()
   @Type(() => ParmanentAddress)
-  @ApiProperty({ type: [ParmanentAddress], required: false })
-  parmanentAddress: ParmanentAddress[];
+  @ApiProperty({
+    type: ParmanentAddress,
+    required: false,
+    default: {
+      address: '',
+      city: '',
+      state: '',
+      zipcode: '',
+    },
+  })
+  parmanentAddress: ParmanentAddress;
 
   @IsObject()
   @Type(() => PresentAddress)
-  @ApiProperty({ type: [PresentAddress], required: false })
-  presentAddress: PresentAddress[];
+  @ApiProperty({
+    type: PresentAddress,
+    required: false,
+    default: {
+      address: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      latlong: {
+        lat: '',
+        long: '',
+      }
+    },
+  })
+  presentAddress: PresentAddress;
 
   @IsBoolean()
-  @ApiProperty({ required: false })
-  Verified: boolean;
+  @ApiProperty({ required: false, default: false })
+  userverified: boolean;
 
   @IsBoolean()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: false })
   live: boolean;
 
   @IsBoolean()
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, default: false })
   onDuty: boolean;
 
   @IsString()
-  @ApiProperty({ required: false })
-  status: string;
+  @ApiProperty({ required: false, default: '' })
+  userstatus: string;
 }
