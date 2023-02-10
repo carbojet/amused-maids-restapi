@@ -1,22 +1,30 @@
 import * as mongoose from 'mongoose';
 
 export const UserSchema = new mongoose.Schema({
-  phone: { type: String, require: true },
-  email: { type: String, require: false },
-  password: { type: String, require: false },
-  role: { type: String, require: false },
-  Verified: { type: Boolean, require: false },
-  live: { type: Boolean, require: false },
-  onDuty: { type: Boolean, require: false },
-  status: { type: String, require: false },
+  phone: { type: Number, require: true },
+  phoneVerified: { type: Boolean, required: false, default: false },
+  email: { type: String, require: false, default: '' },
+  emailVerified: { type: Boolean, required: false, default: false },
+  password: { type: String, require: false, default: '' },
+  role: { type: String, require: false, default: '' },
+  parmanentAddress: { type: Object, required: false },
+  presentAddress: { type: Object, required: false },
+  Verified: { type: Boolean, require: false, default: false },
+  live: { type: Boolean, require: false, default: false },
+  onDuty: { type: Boolean, require: false, default: false },
+  status: { type: String, require: false, default: 'Pending' },
 });
 
 export interface User {
   id: string;
-  phone: string;
+  phone: number;
+  phoneVerified: boolean;
   email: string;
+  emailVerified: boolean;
   password: string;
   role: string;
+  parmanentAddress: object;
+  presentAddress: object;
   Verified: boolean;
   live: boolean;
   onDuty: boolean;

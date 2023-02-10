@@ -29,7 +29,7 @@ import {
   Response_Obj_200,
   Response_Obj_201,
 } from 'src/response';
-import { UsersService } from './user.service';
+import { UsersService } from './services/user.service';
 @Controller('user')
 @ApiTags('user')
 export class UsersController {

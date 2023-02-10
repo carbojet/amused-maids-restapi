@@ -2,10 +2,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsBoolean,
-  IsEmpty,
   IsNotEmpty,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
 } from 'class-validator';
 
@@ -65,16 +65,17 @@ export class CreateUserDto {
 
   @IsBoolean()
   @ApiProperty({ required: false, default: false })
-  phoneverified: boolean;
+  phoneVerified: boolean;
 
   @IsString()
+  @IsOptional()
   @ApiProperty({ required: false, default: '' })
   email: string;
 
   @IsBoolean()
   @ApiProperty({ required: false, default: false })
-  emailverified: boolean;
-
+  emailVerified: boolean;
+  
   @IsString()
   @ApiProperty({ required: false, default: '' })
   password: string;
@@ -107,17 +108,13 @@ export class CreateUserDto {
       city: '',
       state: '',
       zipcode: '',
-      latlong: {
-        lat: '',
-        long: '',
-      }
     },
   })
   presentAddress: PresentAddress;
 
   @IsBoolean()
   @ApiProperty({ required: false, default: false })
-  userverified: boolean;
+  userVerified: boolean;
 
   @IsBoolean()
   @ApiProperty({ required: false, default: false })
@@ -129,5 +126,6 @@ export class CreateUserDto {
 
   @IsString()
   @ApiProperty({ required: false, default: '' })
-  userstatus: string;
+  userStatus: string;
+  
 }
