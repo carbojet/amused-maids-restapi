@@ -10,7 +10,7 @@ export class UsersService {
   async insertUser(dto: any, res: any) {
     try {
       //const userCollection = { dto };
-      console.log(dto.phoneVerified);
+      //console.log(dto.phoneVerified);
       const newUser = new this.userModel(dto);
       const result = await newUser.save();
       if (result) {
@@ -24,6 +24,25 @@ export class UsersService {
         });
       }
     } catch (error){
+      return res.status(409).json({
+        message: error.message,
+      });
+    }
+  }
+  async getUser(ID: string, res: any){
+    try{
+      const result = {};
+      if (result) {
+        return res.status(201).json({
+          message: 'User Created Successfully',
+          result: result,
+        });
+      } else {
+        return res.status(409).json({
+          message: 'User Not Created. Something Problem',
+        });
+      }
+    } catch (error) {
       return res.status(409).json({
         message: error.message,
       });

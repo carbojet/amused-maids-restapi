@@ -51,10 +51,6 @@ export class UsersController {
     description: 'Something want wrong while creating User',
     type: Response_409,
   })
-  @ApiUnauthorizedResponse({
-    description: 'Unauthorized token',
-    type: Response_401,
-  })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Response_500,
@@ -67,4 +63,21 @@ export class UsersController {
     return await this.UsersService.insertUser(body, res);
   }
   //creating end point for get user details by providing ID restapi/user:ID
+  @Get('/:id')
+  @ApiOperation({ summary: ' Get User Details based ID ' })
+  @ApiBadRequestResponse({
+    description: 'Invalid payload',
+    type: Response_400,
+  })
+  @ApiConflictResponse({
+    description: 'Something want wrong while Fetch User',
+    type: Response_409,
+  })
+  @ApiInternalServerErrorResponse({
+    description: 'Internal Server Error',
+    type: Response_500,
+  })
+  async getuser(@Param(ValidationPipe) params, @Response() res) {
+    return await this.UsersService.getUser(params.id, res);
+  }
 }

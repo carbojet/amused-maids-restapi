@@ -2,7 +2,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   IsBoolean,
-  IsNotEmpty,
   IsNumber,
   IsObject,
   IsOptional,
@@ -125,7 +124,7 @@ export class CreateUserDto {
   onDuty: boolean;
 
   @IsString()
-  @ApiProperty({ required: false, default: '' })
+  @ApiProperty({ required: false })
   userStatus: string;
-  
+
 }

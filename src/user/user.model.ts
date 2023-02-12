@@ -14,7 +14,6 @@ export const UserSchema = new mongoose.Schema({
   onDuty: { type: Boolean, require: false, default: false },
   status: { type: String, require: false, default: 'Pending' },
 });
-
 export interface User {
   id: string;
   phone: number;
