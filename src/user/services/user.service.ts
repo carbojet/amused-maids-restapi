@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { User } from '../user.model';
 import { Model } from 'mongoose';
+import * as mongoose from 'mongoose';
+
 @Injectable()
 export class UsersService {
   private Users: User[] = [];
@@ -9,8 +11,6 @@ export class UsersService {
 
   async insertUser(dto: any, res: any) {
     try {
-      //const userCollection = { dto };
-      //console.log(dto.phoneVerified);
       const newUser = new this.userModel(dto);
       const result = await newUser.save();
       if (result) {
@@ -29,9 +29,11 @@ export class UsersService {
       });
     }
   }
-  async getUser(ID: string, res: any){
-    try{
-      const result = {};
+  async getUser(id: string, res: any) {
+    try {
+      const objectId = mongoose.Types.ObjectId;
+      const result = await this.userModel.findById({ id: objectId }).exec();
+      console.log(result);
       if (result) {
         return res.status(201).json({
           message: 'User Created Successfully',

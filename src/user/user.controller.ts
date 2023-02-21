@@ -19,6 +19,7 @@ import {
   ApiConflictResponse,
   ApiUnauthorizedResponse,
   ApiInternalServerErrorResponse,
+  ApiParam,
 } from '@nestjs/swagger';
 import {
   Response_204,
@@ -77,6 +78,7 @@ export class UsersController {
     description: 'Internal Server Error',
     type: Response_500,
   })
+  @ApiParam({ name: 'id', required: true })
   async getuser(@Param(ValidationPipe) params, @Response() res) {
     return await this.UsersService.getUser(params.id, res);
   }
