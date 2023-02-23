@@ -9,7 +9,7 @@ import {
   Query,
   ValidationPipe,
 } from '@nestjs/common';
-import { CreateUserDto } from './dtos/createUser.dto';
+import { CreateRoleDto } from './dtos/createRole.dto';
 import {
   ApiTags,
   ApiOperation,
@@ -31,19 +31,19 @@ import {
   Response_Obj_200,
   Response_Obj_201,
 } from 'src/response';
-import { UsersService } from './services/user.service';
+import { RolesService } from './services/role.service';
 import { query } from 'express';
-@Controller('user')
-@ApiTags('User')
-export class UsersController {
-  constructor(private UsersService: UsersService) {}
+@Controller('role')
+@ApiTags('Role')
+export class RolesController {
+  constructor(private RolesService: RolesService) {}
 
-  //POST end point for add new user restapi/user/create
+  //POST end point for add new Role restapi/role/create
   @Post('/create')
-  @ApiOperation({ summary: 'Create New Product' })
+  @ApiOperation({ summary: 'Create New Role' })
   @ApiConsumes('multipart/form-data', 'application/json')
   @ApiCreatedResponse({
-    description: 'User created successfully',
+    description: 'Role created successfully',
     type: Response_Obj_201,
   })
   @ApiBadRequestResponse({
@@ -51,29 +51,29 @@ export class UsersController {
     type: Response_400,
   })
   @ApiConflictResponse({
-    description: 'Something want wrong while creating User',
+    description: 'Something want wrong while creating Role',
     type: Response_409,
   })
   @ApiInternalServerErrorResponse({
     description: 'Internal Server Error',
     type: Response_500,
   })
-  async createUser(
-    @Body(ValidationPipe) body: CreateUserDto,
+  async createRole(
+    @Body(ValidationPipe) body: CreateRoleDto,
     @Request() req,
     @Response() res,
   ) {
-    return await this.UsersService.insertUser(body, res);
+    return await this.RolesService.insertRole(body, res);
   }
-  //GET end point for get user details by providing ID restapi/user:ID
+  //GET end point for get Role details by providing ID restapi/role:ID
   @Get('/:id')
-  @ApiOperation({ summary: ' Get User Details based ID ' })
+  @ApiOperation({ summary: ' Get Role Details based ID ' })
   @ApiBadRequestResponse({
     description: 'Invalid payload',
     type: Response_400,
   })
   @ApiConflictResponse({
-    description: 'Something want wrong while Fetch User',
+    description: 'Something want wrong while Fetch Role',
     type: Response_409,
   })
   @ApiInternalServerErrorResponse({
@@ -81,18 +81,18 @@ export class UsersController {
     type: Response_500,
   })
   @ApiParam({ name: 'id', required: true })
-  async getuser(@Param(ValidationPipe) params, @Response() res) {
-    return await this.UsersService.getUser(params.id, res);
+  async getrole(@Param(ValidationPipe) params, @Response() res) {
+    return await this.RolesService.getRole(params.id, res);
   }
-  //Get end point for get user list by payload restapi/user
+  //Get end point for get role list by payload restapi/role
   @Get('/')
-  @ApiOperation({ summary: ' Get User List ' })
+  @ApiOperation({ summary: ' Get Role List ' })
   @ApiBadRequestResponse({
     description: 'Invalid payload',
     type: Response_400,
   })
   @ApiConflictResponse({
-    description: 'Something want wrong while Fetch User',
+    description: 'Something want wrong while Fetch Role',
     type: Response_409,
   })
   @ApiInternalServerErrorResponse({
@@ -168,7 +168,7 @@ export class UsersController {
     type: 'string',
     required: false,
   })
-  async getusers(@Query(ValidationPipe) query, @Response() res) {
-    return await this.UsersService.getUsers(query, res);
+  async getroles(@Query(ValidationPipe) query, @Response() res) {
+    return await this.RolesService.getRoles(query, res);
   }
 }

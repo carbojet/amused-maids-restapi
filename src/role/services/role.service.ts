@@ -1,25 +1,25 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from '../user.model';
+import { Role } from '../role.model';
 import { Model } from 'mongoose';
 @Injectable()
-export class UsersService {
-  private Users: User[] = [];
-  constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
+export class RolesService {
+  private Roles: Role[] = [];
+  constructor(@InjectModel('Role') private readonly roleModel: Model<Role>) {}
 
-  async insertUser(dto: any, res: any) {
+  async insertRole(dto: any, res: any) {
     try {
-      const newUser = new this.userModel(dto);
-      const result = await newUser.save();
+      const newRole = new this.roleModel(dto);
+      const result = await newRole.save();
       if (result) {
         return res.status(201).json({
-          message: 'User Created Successfully',
+          message: 'Role Created Successfully',
           data: true,
           result: result,
         });
       } else {
         return res.status(409).json({
-          message: 'User Not Created. Something went wrong',
+          message: 'Role Not Created. Something went wrong',
           data: false,
         });
       }
@@ -30,18 +30,18 @@ export class UsersService {
       });
     }
   }
-  async getUser(id: string, res: any) {
+  async getRole(id: string, res: any) {
     try {
-      const result = await this.userModel.findById({ _id: id });
+      const result = await this.roleModel.findById({ _id: id });
       if (result) {
         return res.status(201).json({
-          message: 'User Created Successfully',
+          message: 'Role Created Successfully',
           data: true,
           result: result,
         });
       } else {
         return res.status(409).json({
-          message: 'User Not Created. went wrong',
+          message: 'Role Not Created. went wrong',
           data: false,
         });
       }
@@ -52,20 +52,20 @@ export class UsersService {
       });
     }
   }
-  async getUsers(query: any, res: any) {
+  async getRoles(query: any, res: any) {
     try {
-      //console.log(query);
-      const result = await this.userModel.find(query);
-      //const result = [];
+      console.log(query);
+      //const result = await this.roleModel.find(dto);
+      const result = [];
       if (result) {
         return res.status(201).json({
-          message: 'User Created Successfully',
+          message: 'Role Created Successfully',
           data: true,
           result: result,
         });
       } else {
         return res.status(409).json({
-          message: 'User Not Created. went wrong',
+          message: 'Role Not Created. went wrong',
           data: false,
         });
       }
